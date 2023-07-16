@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import TickIcon from "./TickIcon"
 import ProgressBar from "./ProgressBar"
 import Modal from "./Modal"
-import REACT_APP_SERVER_URL from '../config'
 
 const ListItem = ({ task, getData }) => {
   const [showModal, setShowModal] = useState(false)
@@ -11,7 +10,7 @@ const ListItem = ({ task, getData }) => {
     e.preventDefault()
     try {
       const result = await fetch(
-        `${REACT_APP_SERVER_URL}/todos/${task.id}`,
+        `${process.env.REACT_APP_SERVERURL}/todos/${task.id}`,
         {
           method: "Delete",
         }

@@ -5,7 +5,7 @@ import Modal from './Modal'
 
 const ListHeader = ({ listName, getData }) => {
   const [showModal, setShowModal] = useState(false)
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [removeCookie] = useCookies(null)
 
   const signOut = () => {
     removeCookie('Email')

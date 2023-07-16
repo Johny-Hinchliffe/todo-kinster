@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react"
-import REACT_APP_SERVER_URL from '../config'
+import { useState} from "react"
 import {useCookies} from 'react-cookie'
 
 
 const Modal = ({ mode, setShowModal, task, getData }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [cookies] = useCookies(null)
 
   const editMode = mode === "edit"
 
@@ -21,7 +20,7 @@ const Modal = ({ mode, setShowModal, task, getData }) => {
   const postData = async (e) => {
     e.preventDefault()
     try {
-      const result = await fetch(`${REACT_APP_SERVER_URL}/todos`, {
+      const result = await fetch(`${process.env.REACT_APP_SERVERURL}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -41,7 +40,7 @@ const Modal = ({ mode, setShowModal, task, getData }) => {
     console.log(data.id)
     try {
       const result = await fetch(
-        `${REACT_APP_SERVER_URL}/todos/${data.id}`,
+        `${process.env.REACT_APP_SERVERURL}/todos/${data.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

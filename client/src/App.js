@@ -2,18 +2,17 @@ import { useEffect, useState } from "react"
 import ListHeader from "./components/ListHeader"
 import ListItem from "./components/ListItem"
 import Auth from "./components/Auth"
-import REACT_APP_SERVER_URL from "./config"
 import {useCookies} from 'react-cookie'
 
 const App = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [cookies,] = useCookies(null)
   const [tasks, setTasks] = useState(null)
   const userEmail = cookies.Email
   const authToken = cookies.AuthToken
 
   const getData = async () => {
     try {
-      const result = await fetch(`${REACT_APP_SERVER_URL}/todos/${userEmail}`)
+      const result = await fetch(`${process.env.REACT_APP_SERVERURL}/todos/${userEmail}`)
       const json = await result.json()
       setTasks(json?.sort((a, b) => new Date(a.date) - new Date(b.date)))
     } catch (err) {

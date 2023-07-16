@@ -1,9 +1,8 @@
 import { useState } from "react"
-import REACT_APP_SERVER_URL from "../config"
 import {useCookies} from 'react-cookie'
 
 const Auth = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [cookies, setCookie] = useCookies(null)
   const [isLogin, SetIsLogin] = useState(true)
   const [error, setError] = useState(null)
   const [email, setEmail] = useState(null)
@@ -19,12 +18,12 @@ const Auth = () => {
 
   const handleSubmit = async (e, endpoint) => {
     e.preventDefault()
-    console.log(`${REACT_APP_SERVER_URL}/${endpoint}`)
+    console.log(`${process.env.REACT_APP_SERVERURL}/${endpoint}`)
     if (!isLogin && password !== confirmPassword) {
       setError("Passwords do no match!")
       return
     }
-    const result = await fetch(`${REACT_APP_SERVER_URL}/${endpoint}`, {
+    const result = await fetch(`${process.env.REACT_APP_SERVERURL}/${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
